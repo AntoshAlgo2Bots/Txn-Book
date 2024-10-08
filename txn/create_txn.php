@@ -205,7 +205,7 @@ $result = mysqli_query($conn, $sql);
                                 <div>
 
                                     <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                                        Particulers / GIVEN To :
+                                        GIVEN To / RECEIVED from :
                                     </label>
                                     <input type="text" name="particuler_to"
                                         class="border-0 px-3 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm w-56 shadow focus:outline-none focus:ring-1 ease-linear transition-all duration-150">

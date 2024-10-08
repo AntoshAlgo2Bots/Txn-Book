@@ -249,7 +249,7 @@ $result = mysqli_query($conn, $sql);
                         </td>
                         <td class="px-6 py-4">
 
-                            <input type="text" name="" id="" value="<?php echo $row['net_balace'] ?>">
+                            <input type="text" name="" id="" value="<?php echo $row['net_balance'] ?>">
                         </td>
                         <td class="px-6 py-4">
                             <input type="text" name="" id="" value=" <?php echo $row['particuler_to'] ?>">
