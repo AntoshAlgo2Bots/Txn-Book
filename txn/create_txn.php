@@ -12,13 +12,13 @@ $conn = mysqli_connect(
 
 
 
-echo $_SESSION["username"];
+// echo $_SESSION["username"];
 
 if (mysqli_connect_error()) {
     echo "Connection Error.<br>";
 }
 
-$sql = "SELECT  * From txn_book Order By transaction_no Desc ";
+$sql = "SELECT  * From txn_book Order By transaction_no Desc Limit 5";
 // $sql="SELECT * FROM txn_book where form_status = 'SAVE'";
 // $sql = "SELECT * FROM daily_txn_book.txn_book;";
 
@@ -168,7 +168,7 @@ $result = mysqli_query($conn, $sql);
                                     <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                                         Transaction Date :
                                     </label>
-                                    <input type="date" name="transaction_date"
+                                    <input type="date" name="transaction_date" required
                                         class="border-0 px-3 py-2 placeholder-blueGray-300 mb-4  text-blueGray-600 bg-white rounded text-sm w-56 shadow focus:outline-none focus:ring-1 ease-linear transition-all duration-150">
                                 </div>
                                 <div>
@@ -412,9 +412,9 @@ $result = mysqli_query($conn, $sql);
                             <th scope="col" class="px-6 py-3">
                                 Status
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <!-- <th scope="col" class="px-6 py-3">
 
-                            </th>
+                            </th> -->
 
                         </tr>
                     </thead>
@@ -461,7 +461,7 @@ $result = mysqli_query($conn, $sql);
                                     <?php echo $row['debit_amt'] ?>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $row['net_balace'] ?>
+                                    <?php echo $row['net_balance'] ?>
                                 </td>
                                 <td class="px-6 py-4">
                                     <?php echo $row['particuler_to'] ?>
@@ -499,9 +499,9 @@ $result = mysqli_query($conn, $sql);
                                 <td class="px-6 py-4">
                                     <?php echo $row['form_status'] ?>
                                 </td>
-                                <td class="px-6 py-4">
+                                <!-- <td class="px-6 py-4">
                                     <a href="#" class="text-blue-600">Edit</a>
-                                </td>
+                                </td> -->
 
                             </tr>
 

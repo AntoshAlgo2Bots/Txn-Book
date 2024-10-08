@@ -30,11 +30,44 @@ $remarks = $_POST["remarks"];
 $currentUser = $_SESSION["username"];
 $currentTime = date("Y-m-d H:i:s");
 
-$net_balace = $credit_amt - $debit_amt;
+// $net_balace = $credit_amt - $debit_amt;
+
+$sql2 = "SELECT net_balance FROM txn_book ORDER BY transaction_no DESC LIMIT 1";
+$result = $conn->query($sql2);
+
+if ($result && $result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $net_balance = $row['net_balance'];
+} else {
+    $net_balance = 0; // Set to 0 if there are no previous transactions
+}
+
+// Validate and sanitize input
+$credit_amt = isset($_POST['credit_amt']) ? (float)$_POST['credit_amt'] : 0;
+$debit_amt = isset($_POST['debit_amt']) ? (float)$_POST['debit_amt'] : 0;
+
+// Update the net balance
+if ($credit_amt > 0) {
+    $net_balance += $credit_amt;
+}
+
+if ($debit_amt > 0) {
+    $net_balance -= $debit_amt;
+}
+
+// Prepare the insert statement
+// $stmt = $conn->prepare("INSERT INTO txn_book (net_balace) VALUES (?)");
+// $stmt->bind_param("d", $net_balace); // "d" for double
+
+// if ($stmt->execute()) {
+//     echo "Transaction successful!";
+// } else {
+//     echo "Error: " . $stmt->error;
+// }
 
 
-$sql = "INSERT INTO daily_txn_book.txn_book(transaction_date, amount_type, credit_amt, debit_amt, net_balace, particuler_to, site, main_head, sub_head, bill_cheque_no, invoice_date, invoice_no, gst_no, remarks, currentUser, currentTime) 
-VALUES('$transaction_date', '$amount_type', '$credit_amt', '$debit_amt', '$net_balace' , '$particuler_to', '$site', '$main_head', '$sub_head', '$bill_cheque_no', '$invoice_date', '$invoice_no', '$gst_no', '$remarks', '$currentUser', '$currentTime')";
+$sql = "INSERT INTO daily_txn_book.txn_book(transaction_date, amount_type, credit_amt, debit_amt, net_balance, particuler_to, site, main_head, sub_head, bill_cheque_no, invoice_date, invoice_no, gst_no, remarks, currentUser, currentTime) 
+VALUES('$transaction_date', '$amount_type', '$credit_amt', '$debit_amt', '$net_balance' , '$particuler_to', '$site', '$main_head', '$sub_head', '$bill_cheque_no', '$invoice_date', '$invoice_no', '$gst_no', '$remarks', '$currentUser', '$currentTime')";
 
 
 if ($conn->query($sql) === TRUE) {

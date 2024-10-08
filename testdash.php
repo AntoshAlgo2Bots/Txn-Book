@@ -18,7 +18,7 @@ if (mysqli_connect_error()) {
     echo "Connection Error.<br>";
 }
 
-$sql = "SELECT  transaction_no, transaction_date, amount_type, credit_amt, debit_amt, net_balace,  main_head, sub_head , currentUser, currentTime From txn_book Order By transaction_no Desc ";
+$sql = "SELECT  transaction_no, transaction_date, amount_type, credit_amt, debit_amt, net_balance,  main_head, sub_head , currentUser, currentTime From txn_book Order By transaction_no Desc Limit 5";
 // $sql="SELECT * FROM txn_book where form_status = 'SAVE'";
 // $sql = "SELECT * FROM daily_txn_book.txn_book;";
 
@@ -94,7 +94,7 @@ $result = mysqli_query($conn, $sql);
         ?>
 
 
-        <nav class="bg-white dark:bg-gray-900  w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600"
+        <nav class="bg-white dark:bg-gray-900  w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600  max-w-8xl mx-auto"
             style="background-color: #6897ff; color: white;">
             <div class="flex flex-wrap items-center justify-between mx-10 p-4">
                 <div class="flex gap-x-20">
@@ -127,7 +127,7 @@ $result = mysqli_query($conn, $sql);
             </div>
         </nav>
 
-        <div>
+        <div class=" max-w-8xl mx-auto">
 
 
 
@@ -135,8 +135,8 @@ $result = mysqli_query($conn, $sql);
 
 
 
-                <div style="max-width: 21rem;"
-                    class="relative flex h-[calc(100vh-2rem)] w-full max-w-[20rem] flex-col bg-white bg-clip-border p-4 text-gray-700 shadow-xl shadow-blue-gray-900/5">
+                <div style="max-width: 15rem;"
+                    class="relative flex h-[calc(100vh-2rem)] w-full max-w-[15rem] flex-col bg-white bg-clip-border p-4 text-gray-700 shadow-xl shadow-blue-gray-900/5">
                     <div class="p-4 mb-2">
                         <h5
                             class="block  border-b border-black text-2xl  text-center pb-1 antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
@@ -236,7 +236,7 @@ $result = mysqli_query($conn, $sql);
                                     </div>
                                     <p
                                         class="block mr-auto  text-base antialiased font-bold leading-relaxed text-blue-gray-900">
-                                        Daily Transaction Book
+                                        Daily Txn Book
                                     </p>
                                     <span class="ml-4">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -328,7 +328,7 @@ $result = mysqli_query($conn, $sql);
                     <div>
                         <div class="relative overflow-x-auto mt-4 mx-10">
                             <table
-                                class="w-full text-sm text-left  rtl:text-right text-gray-500 dark:text-gray-400 mb-2">
+                                class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mb-2">
                                 <thead
                                     class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
@@ -400,7 +400,7 @@ $result = mysqli_query($conn, $sql);
                                                 <?php echo $row['debit_amt'] ?>
                                             </td>
                                             <td class="px-6 py-4">
-                                                <?php echo $row['net_balace'] ?>
+                                                <?php echo $row['net_balance'] ?>
                                             </td>
                                             <td class="px-6 py-4">
                                                 <?php echo $row['main_head'] ?>
