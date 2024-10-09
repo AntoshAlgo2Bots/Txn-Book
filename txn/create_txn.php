@@ -25,7 +25,31 @@ $sql = "SELECT  * From txn_book Order By transaction_no Desc Limit 5";
 
 $result = mysqli_query($conn, $sql);
 
-?> 
+$query = "SELECT main_head_name FROM add_attribute WHERE main_head_name IS NOT NULL AND main_head_name != ''";
+$result1 = $conn->query($query);
+
+$options = [];
+if ($result1->num_rows > 0) {
+    while ($row = $result1->fetch_assoc()) {
+        $options[] = $row['main_head_name'];
+    }
+}
+
+$query2 = "SELECT sub_main_name FROM add_attribute WHERE sub_main_name IS NOT NULL AND sub_main_name != ''";
+$result3 = $conn->query($query2);
+
+$options2 = [];
+if ($result3->num_rows > 0) {
+    while ($row = $result3->fetch_assoc()) {
+        $options2[] = $row['sub_main_name'];
+    }
+}
+
+
+
+?>
+
+
 
 
 <!DOCTYPE html>
@@ -106,8 +130,8 @@ $result = mysqli_query($conn, $sql);
                             <a href="../testdash.php"
                                 class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
                                 aria-current="page">Home</a>
-                            <!-- </li>
-                <li>
+                        </li>
+                        <!--  <li>
                     <a href="#"
                         class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
                 </li>
@@ -133,7 +157,7 @@ $result = mysqli_query($conn, $sql);
                     <div class="text-center flex justify-between">
                         <h6 class="text-blueGray-700 text-xl font-bold">
                             Daily Transaction Creation Book
-                            <?php echo $_SESSION["username"]; ?>
+                            <!-- <?php echo $_SESSION["username"]; ?> -->
                         </h6>
                         <!-- <button
                         class="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
@@ -226,22 +250,9 @@ $result = mysqli_query($conn, $sql);
                                     <select name="main_head"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-56 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         <option selected hidden>Select one</option>
-                                        <option value="bf">BF</option>
-                                        <option value="fuel">FUEL</option>
-                                        <option value="office_running">OFFICE RUNNING</option>
-                                        <option value="cash_received">CASH RECEIVED</option>
-                                        <option value="esic">ESIC</option>
-                                        <option value="salary">SALARY</option>
-                                        <option value="hkb">HKB</option>
-                                        <option value="dvr">DVR</option>
-                                        <option value="ss">SS</option>
-                                        <option value="cash">CASH</option>
-                                        <option value="donation">DONATION</option>
-                                        <option value="cd_9">CD 9</option>
-                                        <option value="disp">DISP</option>
-                                        <option value="fuel_vm">FUEL & VM</option>
-                                        <option value="dda">DDA</option>
-                                        <option value="office">OFFICE</option>
+                                        <?php foreach ($options as $option) { ?>
+                                            <option value="<?php echo $option; ?>"><?php echo $option; ?></option>
+                                        <?php } ?>
 
                                     </select>
                                 </div>
@@ -253,33 +264,9 @@ $result = mysqli_query($conn, $sql);
                                     <select name="sub_head"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-56 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         <option selected hidden>Select one</option>
-                                        <option value="bf">BF</option>
-                                        <option value="fuel">FUEL</option>
-                                        <option value="staff_welfare">STAFF WELFARE</option>
-                                        <option value="col_hkb">COL HKB</option>
-                                        <option value="ramesh_nagar">RAMESH NAGAR</option>
-                                        <option value="dayavasti">DAYAVASTI</option>
-                                        <option value="ip_ajadpur">IP AJADPUR</option>
-                                        <option value="c_5">C-5</option>
-                                        <option value="nagi">NAGI</option>
-                                        <option value="dmd">DMD</option>
-                                        <option value="salary">SALARY</option>
-                                        <option value="dda_rskp">DDA RSKP</option>
-                                        <option value="dda_saket">DDA SAKET</option>
-                                        <option value="pers">PERS</option>
-                                        <option value="adv">ADV</option>
-                                        <option value="cd_iii">CD-III</option>
-                                        <option value="khanna">KHANNA</option>
-                                        <option value="dda_rohani">DDA ROHANI</option>
-                                        <option value="esic_disp">ESIC DISP</option>
-                                        <option value="donation">DONATION</option>
-                                        <option value="ss">SS</option>
-                                        <option value="maherpoil">MAHERPOIL</option>
-                                        <option value="shastri_nagar">SHASTRI NAGAR</option>
-                                        <option value="avantika">AVANTIKA</option>
-                                        <option value="div_6">DIV 6</option>
-                                        <option value="staitnory">STAITNORY</option>
-                                        <option value="jahangir_puri_badli">JAHANGIR PURI BADLI</option>
+                                        <?php foreach ($options2 as $option) { ?>
+                                            <option value="<?php echo $option; ?>"><?php echo $option; ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
