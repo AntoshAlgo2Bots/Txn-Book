@@ -131,12 +131,12 @@ $result = mysqli_query($conn, $sql);
 
 
 
-            <div class="flex" style="height: calc(100vh - 70px);">
+            <div class="flex">
 
 
 
-                <div style="max-width: 15rem;"
-                    class="relative flex h-[calc(100vh-2rem)] w-full max-w-[15rem] flex-col bg-white bg-clip-border p-4 text-gray-700 shadow-xl shadow-blue-gray-900/5">
+                <div style="max-width: 18rem;"
+                    class="relative flex w-full max-w-[15rem] flex-col bg-white bg-clip-border p-4 text-gray-700 shadow-xl shadow-blue-gray-900/5">
                     <div class="p-4 mb-2">
                         <h5
                             class="block  border-b border-black text-2xl  text-center pb-1 antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
@@ -302,7 +302,6 @@ $result = mysqli_query($conn, $sql);
                         </div>
                         <div class="relative block w-full">
 
-
                         </div>
 
 
@@ -314,10 +313,16 @@ $result = mysqli_query($conn, $sql);
                 <div>
 
 
-                    <div class="w-full flex flex-wrap justify-center border-gray-200 mt-4"
-                        style="background-color: #;">
+                    <div class="w-full flex flex-wrap justify-center border-gray-200 mt-4" style="background-color: #;">
 
-                        <div class="datachart border-2 bg-gray-100 " style="width:32rem; height:20rem" id="txn_div">
+                        <!-- <div class="datachart border-2 bg-gray-100 " style="width:32rem; height:20rem" id="txn_div"></div> -->
+                        <div class="flex flex-wrap">
+                            
+                            <?php include("./barChart.php") ?>
+                        </div>
+                        <div class="flex flex-wrap gap-x-20 ">
+                            
+                            <?php include("./pieChart.php") ?>
                         </div>
                         <a href="./user/user_report.php">
                             <!-- <div class="datachart border-2 bg-gray-100 ml-5" style="width:32rem; height:20rem"
@@ -326,7 +331,7 @@ $result = mysqli_query($conn, $sql);
                         </a>
                     </div>
                     <div>
-                        <div class="relative overflow-x-auto mt-4 mx-10">
+                        <!-- <div class="relative overflow-x-auto mt-4 mx-10">
                             <table
                                 class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mb-2">
                                 <thead
@@ -414,7 +419,7 @@ $result = mysqli_query($conn, $sql);
                                             <td class="px-6 py-4">
                                                 <?php echo $row['currentTime'] ?>
                                             </td>
-                                        
+
                                         </tr>
 
                                         <?php
@@ -425,7 +430,7 @@ $result = mysqli_query($conn, $sql);
                                     ?>
                                 </tbody>
                             </table>
-                        </div>
+                        </div> -->
                     </div>
 
 
