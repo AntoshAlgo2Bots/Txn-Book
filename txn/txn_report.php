@@ -298,9 +298,9 @@ $result = mysqli_query($conn, $sql);
                         <td class="px-6 py-4">
                             <input type="text" name="" id="" value=" <?php echo $row['form_status'] ?>">
                         </td>
-                        <td class="px-6 py-4">
+                        <!-- <td class="px-6 py-4">
                             <a href="" class="text-blue-700">Edit</a>
-                        </td>
+                        </td> -->
 
                     </tr>
 

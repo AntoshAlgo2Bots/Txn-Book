@@ -62,7 +62,7 @@ $(document).ready(function () {
 
 const getCheckedRowData = () => {
 
-    let tbody = $("#rowAreaTbody")[0]
+    let tbody = $("#searchTableTbody")[0]
 
     let rows = tbody.querySelectorAll("tr")
 

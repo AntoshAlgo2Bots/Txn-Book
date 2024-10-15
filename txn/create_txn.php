@@ -18,7 +18,12 @@ if (mysqli_connect_error()) {
     echo "Connection Error.<br>";
 }
 
-$sql = "SELECT  * From txn_book Order By transaction_no Desc Limit 5";
+$sql = "SELECT * 
+FROM txn_book 
+WHERE form_status = 'Save' 
+ORDER BY transaction_no DESC 
+LIMIT 10;
+";
 // $sql="SELECT * FROM txn_book where form_status = 'SAVE'";
 // $sql = "SELECT * FROM daily_txn_book.txn_book;";
 
@@ -192,7 +197,7 @@ if ($result3->num_rows > 0) {
                                     <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                                         Transaction Date :
                                     </label>
-                                    <input type="date" name="transaction_date" required
+                                    <input type="date" id="dateInput" name="transaction_date" required
                                         class="border-0 px-3 py-2 placeholder-blueGray-300 mb-4  text-blueGray-600 bg-white rounded text-sm w-56 shadow focus:outline-none focus:ring-1 ease-linear transition-all duration-150">
                                 </div>
                                 <div>
@@ -405,7 +410,7 @@ if ($result3->num_rows > 0) {
 
                         </tr>
                     </thead>
-                    <tbody class="" id="rowAreaTbody">
+                    <tbody id="searchTableTbody">
 
 
                         <?php
@@ -432,59 +437,84 @@ if ($result3->num_rows > 0) {
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                     <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
                                 </th>
-                                <th scope="row" class="px-6 py-4">
-                                    <?php echo $row['transaction_no'] ?>
-                                </th>
-                                <td class="px-6 py-4">
-                                    <?php echo $row['transaction_date'] ?>
+                                <td scope="row" class="px-6 py-4">
+                                    <input type="text" name="transaction_no" id="" disabled
+                                        value=" <?php echo $row['transaction_no'] ?>" class="w-20">
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $row['amount_type'] ?>
+                                    <input type="text" name="transaction_date" id=""
+                                        value="<?php echo $row['transaction_date'] ?>" class="w-32">
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $row['credit_amt'] ?>
+                                    <input type="text" name="amount_type" id="" value="<?php echo $row['amount_type'] ?>"
+                                        class="w-20">
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $row['debit_amt'] ?>
+                                    <input type="text" name="credit_amt" id="" value="<?php echo $row['credit_amt'] ?>"
+                                        class="w-24">
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $row['net_balance'] ?>
+                                    <input type="text" name="debit_amt" id="" value="<?php echo $row['debit_amt'] ?>"
+                                        class="w-24">
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $row['particuler_to'] ?>
+
+                                    <input type="text" name="net_balance" id="" value="<?php echo $row['net_balance'] ?>"disabled
+                                        class="w-28">
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $row['site'] ?>
+                                    <input type="text" name="particuler_to" id=""
+                                        value=" <?php echo $row['particuler_to'] ?>">
+
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $row['main_head'] ?>
+                                    <input type="text" name="site" id="" value=" <?php echo $row['site'] ?>">
+
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $row['sub_head'] ?>
+                                    <input type="text" name="main_head" id="" value="<?php echo $row['main_head'] ?>"
+                                        class="w-40">
+
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $row['currentUser'] ?>
+                                    <input type="text" name="sub_head" id="" value=" <?php echo $row['sub_head'] ?>"
+                                        class="w-40">
+
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $row['currentTime'] ?>
+                                    <input type="text" name="" id="<?php echo $row['currentUser'] ?>" class="w-32">
+
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $row['bill_cheque_no'] ?>
+                                    <input type="text" name="" id="" value=" <?php echo $row['currentTime'] ?>">
+
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $row['invoice_date'] ?>
+                                    <input type="text" name="bill_cheque_no" id=""
+                                        value="<?php echo $row['bill_cheque_no'] ?>">
+
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $row['invoice_no'] ?>
+                                    <input type="text" name="invoice_date" id="" value="<?php echo $row['invoice_date'] ?>"
+                                        class="w-28">
+
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $row['gst_no'] ?>
+                                    <input type="text" name="invoice_no" id="" value="<?php echo $row['invoice_no'] ?>">
+
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $row['remarks'] ?>
+                                    <input type="text" name="gst_no" id="" value=" <?php echo $row['gst_no'] ?>"
+                                        class="w-28">
+
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $row['form_status'] ?>
+                                    <input type="text" name="remarks" id="" value="<?php echo $row['remarks'] ?>">
+
+                                </td>
+                                <td class="px-6 py-4">
+                                    <input type="text" name="" id="" value=" <?php echo $row['form_status'] ?>"
+                                        class="w-20">
                                 </td>
                                 <!-- <td class="px-6 py-4">
                                     <a href="#" class="text-blue-600">Edit</a>
@@ -501,7 +531,12 @@ if ($result3->num_rows > 0) {
                     </tbody>
                 </table>
             </div>
-            <div class="flex justify-center mb-5 mt-4">
+            <div class="flex justify-center gap-x-10 mb-5 mt-4">
+                <button type="button" id="updateBtn"
+                    class="bg-green-600 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                    type="button">
+                    Update Now
+                </button>
                 <button onclick="getCheckedRowData()"
                     class="bg-pink-700 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                     type="button">
@@ -511,8 +546,97 @@ if ($result3->num_rows > 0) {
         </div>
     </section>
 
-
+    <!-- <script>
+    function updateDateTime() {
+        const now = new Date();
+        // Get UTC time and add 5 hours and 30 minutes for IST
+        const istOffset = 5.5 * 60 * 60 * 1000; // 5 hours 30 minutes in milliseconds
+        const istDate = new Date(now.getTime() + istOffset);
+        
+        // Format the date to YYYY-MM-DDTHH:MM
+        const formattedDateTime = istDate.toISOString().slice(0, 16);
+        document.getElementById('datetime').value = formattedDateTime;
+        }
+        
+        // Update the input field when the page loads
+        window.onload = updateDateTime;
+    </script> -->
+    
     <script src="./script.js"></script>
+    <script>
+        function setCurrentDate() {
+            const now = new Date();
+
+            // Format the date to YYYY-MM-DD
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+            const day = String(now.getDate()).padStart(2, '0');
+
+            const formattedDate = `${year}-${month}-${day}`;
+            document.getElementById('dateInput').value = formattedDate;
+        }
+        
+        // Set the current date when the page loads
+        window.onload = setCurrentDate;
+
+
+
+
+
+
+
+        $(document).ready(function () {
+            $("#updateBtn").on("click", function () {
+                const checkedRowsData = [];
+
+                $("#searchTableTbody input[type='checkbox']").each(function () {
+                    if ($(this).is(":checked")) {
+                        const row = $(this).closest("tr");
+                        const rowData = {
+                            transaction_no: row.find('input[name="transaction_no"]').val() || '',
+                            transaction_date: row.find('input[name="transaction_date"]').val() || '',
+                            amount_type: row.find('input[name="amount_type"]').val() || '',
+                            credit_amt: row.find('input[name="credit_amt"]').val() || '',
+                            debit_amt: row.find('input[name="debit_amt"]').val() || '',
+                            net_balance: row.find('input[name="net_balance"]').val() || '',
+                            particuler_to: row.find('input[name="particuler_to"]').val() || '',
+                            site: row.find('input[name="site"]').val() || '',
+                            main_head: row.find('input[name="main_head"]').val() || '',
+                            sub_head: row.find('input[name="sub_head"]').val() || '',
+                            bill_cheque_no: row.find('input[name="bill_cheque_no"]').val() || '',
+                            invoice_date: row.find('input[name="invoice_date"]').val() || '',
+                            invoice_no: row.find('input[name="invoice_no"]').val() || '',
+                            gst_no: row.find('input[name="gst_no"]').val() || '',
+                            remarks: row.find('input[name="remarks"]').val() || ''
+                        };
+                        checkedRowsData.push(rowData);
+                    }
+                });
+
+
+                if (checkedRowsData.length > 0) {
+                    $.ajax({
+                        url: '../phpAJax/txnSaveModify.php', // Replace with your actual PHP script
+                        type: 'POST',
+                        data: { rows: checkedRowsData },
+                        success: function (response) {
+                            alert("Data Updated Successfully");
+                            console.log(response);
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                } else {
+                    alert("Please select at least one checkbox.");
+                }
+            });
+        });
+
+
+
+
+    </script>
 </body>
 
 </html>
