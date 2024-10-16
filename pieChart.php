@@ -99,7 +99,7 @@ $conn->close();
 </head>
 
 <body class="bg-gray-100 flex flex-wrap items-center justify-center min-h-screen">
-    <div class="bg-white shadow-lg rounded-lg p-8 max-w-md mx-auto text-center border">
+    <div class="bg-white shadow-lg rounded-lg p-8 max-w-64 mx-auto text-center border">
         <h1 class="text-xl font-bold mb-6">All Credit And Debit Txn</h1>
         <div class="flex">
 
@@ -107,7 +107,7 @@ $conn->close();
         </div>
     </div>
 
-    <div class="bg-white shadow-lg rounded-lg p-8 max-w-md mx-auto text-center border">
+    <div class="bg-white shadow-lg rounded-lg p-8 max-w-64 mx-auto text-center border">
         <h1 class="text-xl font-bold mb-6">Net Balance</h1>
         <h2>Total Save + Submit Txn</h2>
         <div class="flex">
@@ -119,7 +119,7 @@ $conn->close();
 
 
 
-    <div class="bg-white shadow-lg rounded-lg p-8 max-w-md mx-auto text-center border">
+    <div class="bg-white shadow-lg rounded-lg p-8 max-w-64 mx-auto text-center border">
         <h1 class="text-xl font-bold mb-6">Save Status</h1>
         <div class="flex">
 
@@ -127,7 +127,7 @@ $conn->close();
         </div>
     </div>
 
-    <div class="bg-white shadow-lg rounded-lg p-8 max-w-md mx-auto text-center border">
+    <div class="bg-white shadow-lg rounded-lg p-8 max-w-64 mx-auto text-center border">
         <h1 class="text-xl font-bold mb-6">Submit Status</h1>
         <div class="flex">
 

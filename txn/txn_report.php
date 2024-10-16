@@ -152,7 +152,17 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
 
     <div class="relative overflow-x-auto mt-4 mx-5">
-        <table class="w-full text-sm text-left whitespace-nowrap rtl:text-right text-gray-500 dark:text-gray-400 mb-2">
+        <button onclick="exportTableToCSV('table.csv')" type="button"
+            class="flex items-center justify-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+            <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true">
+                <path clip-rule="evenodd" fill-rule="evenodd"
+                    d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+            </svg>
+            Export to CSV
+        </button>
+        <table class="w-full text-sm text-left whitespace-nowrap rtl:text-right text-gray-500 dark:text-gray-400 mb-2"
+            id="myTable">
             <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
@@ -336,63 +346,12 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
 
                 ?>
+
+
             </tbody>
         </table>
+
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -750,82 +709,39 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
 
 
-
 <script>
-    let userIsSelected = 10;
+    function exportTableToCSV(filename) {
+        const table = document.getElementById('myTable');
+        let csv = [];
 
+        // Get table headers
+        const headers = Array.from(table.querySelectorAll('th')).map(th => th.innerText);
+        csv.push(headers.join(','));
 
+        // Get table rows
+        const rows = Array.from(table.querySelectorAll('tr')).slice(1); // Exclude header row
+        rows.forEach(row => {
+            const cells = Array.from(row.querySelectorAll('td')).map(td => td.innerText);
+            csv.push(cells.join(','));
+        });
 
+        // Create a CSV file
+        const csvContent = csv.join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
 
-    const beforeSubmitHandle = () => {
+        // Create a link to download the CSV
+        const link = document.createElement('a');
+        link.setAttribute('href', url);
+        link.setAttribute('download', filename);
+        link.style.display = 'none';
 
-        document.getElementById("roleUserId").disabled = false;
-
-
-
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     }
 
-
-
-    function enableItem(e, id) {
-
-        //   console.log(e.target.parentElement);  
-        //   console.log(((e.target.parentElement).parentElement).getElementsByTagName("input"))
-
-        let dt = ((e.target.parentElement).parentElement).getElementsByTagName("input")
-        for (let element of dt) {
-            element.disabled = false;
-            element.style.color = "red"
-
-
-        }
-
-
-
-        id.classList.remove("hidden")
-        // console.log(id);
-        e.target.style.display = "none";
-
-        // document.getElementById(id).classList.remove("hidden")      
-
-        // e.target.preventDefault()
-        // e.target.name="update_button"
-        // e.target.type="submit"
-
-    }
-
-
-    let id_1 = 1;
-
-
-
-
-    const showRolesBox = (e) => {
-
-        document.getElementById("roleUserId").value = ""
-
-        //    console.log((e.target.parentElement).getElementByName("user_id"))
-
-
-        // let selected_id = (e.target.parentElement).parentElement.getElementsByClassName("user_id");
-
-
-        userIsSelected = (e.target.parentElement).parentElement.getElementsByName("userNumber").value
-        console.log(userIsSelected);
-        // document.getElementById("roleUserId").value = userIsSelected
-        document.getElementById("roleUserId").value = 10
-    }
-
-
-    const openNewAdminBox = () => {
-
-        newUserAdmin.style.display = "block"
-
-
-
-    }
 </script>
-
 
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 <script src="./js/scripts.js"></script>

@@ -30,7 +30,7 @@ if(isset($_SESSION['username'])){
 
     <div class="companyLogo">
         <p class="mr-1 font-bold" style="margin-top:15%"> @Powered by.... &nbsp; </p>
-        <img src="./logo/Algo2botsinfotech logo.jpg" alt="" width="80px">
+        <img src="https://test.algo2botsinfotech.com/logo/Algo2botsinfotech%20logo.jpg" alt="" width="80px">
     </div>
 
     <div class="min-h-screen bg-gray-50 flex flex-wrap justify-center py-12 sm:px-6 lg:px-8">

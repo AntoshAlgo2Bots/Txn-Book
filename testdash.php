@@ -57,7 +57,7 @@ $result = mysqli_query($conn, $sql);
             sidebar.classList.toggle('hidden');
         }
 
-        
+
     </script>
 </head>
 
@@ -93,18 +93,45 @@ $result = mysqli_query($conn, $sql);
 
         ?>
 
+        <header class="bg-[#7695FF] text-white shadow p-4 flex items-center justify-between max-w-8xl mx-auto">
+            <div class="flex items-center">
+                <button onclick="toggleSidebar()" class="lg:hidden p-2 text-gray-600 hover:bg-gray-200 rounded">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+                <h2 class="text-xl text-white font-semibold ml-2"> Hello! <?php echo $_SESSION["username"] ?></span>
+                </h2>
+                <!-- <h2 class="text-xl font-semibold ml-2"> Hello! Antosh</span></h2> -->
+
+                <div class="hidden  w-full md:flex md:w-auto md:order-1 ml-20" id="navbar-sticky">
+                    <a href="./testdash.php" class="font-semibold text-md">Home</a>
+                </div>
+            </div>
+            <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                <a href="logout.php" type="button"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</a>
+            </div>
+
+
+        </header>
+
 
         <div class="flex flex-col lg:flex-row max-w-8xl mx-auto">
             <!-- Sidebar -->
-            <aside id="sidebar" class="bg-[#F9FAFB] text-black border-gray-600 w-full lg:w-64 p-5 lg:static lg:h-auto hidden lg:block">
-                <h1 class="text-lg border-b pb-2 font-semibold mb-6">Daily Transaction Book</h1>
+
+            <aside id="sidebar"
+                class="bg-[#ffb399] text-black border-gray-600 w-full lg:w-64 p-5 lg:static lg:h-auto hidden lg:block">
+                <h1 class="text-lg border-b pb-1 mt-1 text-center font-semibold mb-6">Roles</h1>
                 <nav>
                     <div class="relative block w-full">
                         <div role="button"
                             class="flex items-center w-full p-0 leading-tight transition-all rounded-lg outline-none bg-blue-gray-50/50 text-start text-blue-gray-700 hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
                             <button type="button" onclick="membershipFormShowHide()"
                                 class="flex items-center justify-between w-full p-3  text-xl antialiased font-semibold leading-snug text-left transition-colors border-b-0 select-none border-b-blue-gray-100 text-blue-gray-900 hover:text-blue-gray-900">
-                                
+
                                 <p
                                     class="block mr-auto text-base antialiased font-bold leading-relaxed text-blue-gray-900 border-b">
                                     Daily Txn Book
@@ -175,10 +202,10 @@ $result = mysqli_query($conn, $sql);
                             class="flex items-center w-full p-0 leading-tight transition-all rounded-lg outline-none bg-blue-gray-50/50 text-start text-blue-gray-700 hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
                             <button type="button" onclick="userFormShowHide()"
                                 class="flex items-center justify-between w-full p-3  text-xl antialiased font-semibold leading-snug text-left transition-colors border-b-0 select-none border-b-blue-gray-100 text-blue-gray-900 hover:text-blue-gray-900">
-                                
+
                                 <p
                                     class="block mr-auto  text-base antialiased font-bold leading-relaxed text-blue-gray-900 border-b">
-                                   Add Attribute
+                                    Add Attribute
                                 </p>
                                 <span class="ml-4">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -220,41 +247,19 @@ $result = mysqli_query($conn, $sql);
             <!-- Main Content -->
             <div class="flex-1 flex flex-col">
                 <!-- Navbar -->
-                <header class="bg-[#7695FF] text-white shadow p-4 flex items-center justify-between">
-                    <div class="flex items-center">
-                        <button onclick="toggleSidebar()" class="lg:hidden p-2 text-gray-600 hover:bg-gray-200 rounded">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 6h16M4 12h16m-7 6h7"></path>
-                            </svg>
-                        </button>
-                        <h2 class="text-xl text-white font-semibold ml-2"> Hello! <?php echo $_SESSION["username"] ?></span></h2>
-                        <!-- <h2 class="text-xl font-semibold ml-2"> Hello! Antosh</span></h2> -->
 
-                        <div class="hidden  w-full md:flex md:w-auto md:order-1 ml-20" id="navbar-sticky">
-                            <a href="./testdash.php" class="font-semibold text-md">Home</a>
-                        </div>
-                    </div>
-                    <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                        <a href="logout.php" type="button"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</a>
-                    </div>
-
-
-                </header>
 
                 <!-- Content Area -->
                 <main class="flex-1 p-6 bg-gray-100">
-                    <h3 class="text-lg font-semibold mb-4">Overview</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-4">
-                        <div class="bg-white p-4 rounded shadow">
-                            <?php include("./barChart.php") ?>
+                    <h3 class="text-lg font-bold text-2xl mb-4 text-center">Management Dashboard</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+                        <div class="flex flex-wrap bg-white p-4 rounded shadow">
+                            <?php include("./pieChart.php") ?>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 mt-5">
-                        <div class="flex flex-wrap gap-x-20 gap-y-10 bg-white p-4 rounded shadow">
-                            <?php include("./pieChart.php") ?>
+                    <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-4 mt-5">
+                        <div class="bg-white p-4 rounded shadow">
+                            <?php include("./barChart.php") ?>
                         </div>
                     </div>
                 </main>
