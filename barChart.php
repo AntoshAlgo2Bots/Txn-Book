@@ -1,14 +1,7 @@
 <?php
 // Database connection
-$host = 'localhost';
-$db = 'daily_txn_book';
-$user = 'root';
-$pass = 'root';
+include("./db/db.php");
 
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // Query to sum credit and debit amounts by date
 $sql = "
@@ -72,14 +65,14 @@ $conn->close();
                     {
                         label: 'Credit',
                         data: creditData,
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        backgroundColor: 'rgba(16, 150, 24, 0.5)',
                         borderColor: 'rgba(54, 162, 235, 1)',
                         borderWidth: 1
                     },
                     {
                         label: 'Debit',
                         data: debitData,
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        backgroundColor: 'rgba(255, 0, 0, 0.5)',
                         borderColor: 'rgba(255, 99, 132, 1)',
                         borderWidth: 1
                     }

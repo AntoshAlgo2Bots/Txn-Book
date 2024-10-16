@@ -3,11 +3,31 @@
 include("../db/db.php");
 
 
-
-$sql = "SELECT * FROM daily_txn_book.user_report;";
+$sql = "SELECT * FROM daily_txn_book.txn_book;";
 
 
 $result = mysqli_query($conn, $sql);
+
+
+
+if ($_SERVER['REQUEST_METHOD'] == "GET") {
+
+
+
+    if (isset($_GET["search_query"])) {
+        $query = $_GET["search_query"];
+
+        $sql = "SELECT * FROM txn_book where transaction_no ='$query' or form_status='$query' ";
+
+        $result = mysqli_query($conn, $sql);
+
+        // echo "QIURY";
+    }
+}
+
+
+
+
 
 ?>
 
@@ -109,7 +129,7 @@ $result = mysqli_query($conn, $sql);
     <div>
 
 
-        <form class="flex items-center  max-w-lg mx-auto mt-4" method="POST">
+        <form class="flex items-center  max-w-lg mx-auto mt-4" method="GET">
             <label for="voice-search" class="sr-only">Search</label>
             <div class="relative w-full mr-2">
 
@@ -131,54 +151,77 @@ $result = mysqli_query($conn, $sql);
     </div>
 
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-6 mb-4 mx-5">
-        <table class=" text-sm text-left rtl:text-right whitespace-nowrap text-gray-500 dark:text-gray-400">
-
-            <thead class=" text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <div class="relative overflow-x-auto mt-4 mx-5">
+        <table class="w-full text-sm text-left whitespace-nowrap rtl:text-right text-gray-500 dark:text-gray-400 mb-2">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        user id
+                        Txn No
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        user name
+                        Transaction Date
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Amount Type
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Credit Amount
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Debit Amount
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Net Balance
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Particulers / GIVEN To
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Site
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Main Head
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Sub Head
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Created By
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Created Date
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Updated By
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        creadted by
+                        Updated Date
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        creadted date
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        updated date
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        mobile number
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        email id
+                        Bill / Cheque No
                     </th>
 
                     <th scope="col" class="px-6 py-3">
-                        person id
+                        Invoice Dated
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
+                        Invoice No
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        password
+                        GST No
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        start date
+                        Remarks
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        end date
+                        Status
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        role
+
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        <span class="sr-only">Edit</span>
-                    </th>
+
+
                 </tr>
             </thead>
             <tbody class="" id="rowAreaTbody">
@@ -197,45 +240,91 @@ $result = mysqli_query($conn, $sql);
 
 
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <!-- <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <input id="checkbox-table-search-1" line-id="<?php echo $row['transaction_no'] ?>"
+                                        type="checkbox"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
+                                </th> -->
                         <th scope="row" class="px-6 py-4">
-                            <?php echo $row['user_id'] ?>
+                            <input type="text" name="" id="" value=" <?php echo $row['transaction_no'] ?>" disabled>
                         </th>
                         <td class="px-6 py-4">
-                            <?php echo $row['user_name'] ?>
+                            <input type="text" name="" id="" value="<?php echo $row['transaction_date'] ?>" disabled>
                         </td>
                         <td class="px-6 py-4">
-                            <?php echo $row['updataed_by'] ?>
+                            <input type="text" name="" id="" value="<?php echo $row['amount_type'] ?>" disabled>
                         </td>
                         <td class="px-6 py-4">
-                            <?php echo $row['createdBy'] ?>
+                            <input type="text" name="" id="" value="<?php echo $row['credit_amt'] ?>" disabled>
                         </td>
                         <td class="px-6 py-4">
-                            <?php echo $row['created_date'] ?>
+                            <input type="text" name="" id="" value="<?php echo $row['debit_amt'] ?>" disabled>
                         </td>
                         <td class="px-6 py-4">
-                            <?php echo $row['updated_date'] ?>
+
+                            <input type="text" name="" id="" value="<?php echo $row['net_balance'] ?>" disabled>
                         </td>
                         <td class="px-6 py-4">
-                            <?php echo $row['mobile_number'] ?>
+                            <input type="text" name="" id="" value=" <?php echo $row['particuler_to'] ?>" disabled>
+
                         </td>
                         <td class="px-6 py-4">
-                            <?php echo $row['email_id'] ?>
+                            <input type="text" name="" id="" value=" <?php echo $row['site'] ?>" disabled>
+
                         </td>
                         <td class="px-6 py-4">
-                            <?php echo $row['person_id'] ?>
+                            <input type="text" name="" id="" value="<?php echo $row['main_head'] ?>" disabled>
+
                         </td>
                         <td class="px-6 py-4">
-                            <?php echo $row['password'] ?>
+                            <input type="text" name="" id="" value=" <?php echo $row['sub_head'] ?>" disabled>
+
                         </td>
                         <td class="px-6 py-4">
-                            <?php echo $row['start_date'] ?>
+                            <input type="text" name="" id="" value=" <?php echo $row['currentUser'] ?>" disabled>
+
                         </td>
                         <td class="px-6 py-4">
-                            <?php echo $row['end_date'] ?>
+                            <input type="text" name="" id="" value=" <?php echo $row['currentTime'] ?>" disabled>
+
                         </td>
                         <td class="px-6 py-4">
-                            <?php echo $row['role'] ?>
+                            <input type="text" name="" id="" value=" <?php echo $row['updatedBy'] ?>" disabled>
+
                         </td>
+                        <td class="px-6 py-4">
+                            <input type="text" name="" id="" value=" <?php echo $row['updatedDate'] ?>" disabled>
+
+                        </td>
+                        <td class="px-6 py-4">
+                            <input type="text" name="" id="" value="<?php echo $row['bill_cheque_no'] ?>" disabled>
+
+                        </td>
+                        <td class="px-6 py-4">
+                            <input type="text" name="" id="" value="<?php echo $row['invoice_date'] ?>" disabled>
+
+                        </td>
+                        <td class="px-6 py-4">
+                            <input type="text" name="" id="" value="<?php echo $row['invoice_no'] ?>" disabled>
+
+                        </td>
+                        <td class="px-6 py-4">
+                            <input type="text" name="" id="" value=" <?php echo $row['gst_no'] ?>" disabled>
+
+                        </td>
+                        <td class="px-6 py-4">
+                            <input type="text" name="" id="" value="<?php echo $row['remarks'] ?>" disabled>
+
+                        </td>
+                        <td class="px-6 py-4">
+                            <input type="text" name="" id="" value=" <?php echo $row['form_status'] ?>" disabled>
+                        </td>
+                        <!-- <td class="px-6 py-4">
+                            <a href="" class="text-blue-700">Edit</a>
+                        </td> -->
+
                     </tr>
 
 
@@ -308,6 +397,9 @@ $result = mysqli_query($conn, $sql);
 
 
 
+
+
+    <!-- this is another div or box\ -->
 
 
 
@@ -384,13 +476,13 @@ $result = mysqli_query($conn, $sql);
                                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             Users view
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class=px-6 py-4">
                                             <div class="flex items-center mb-4">
                                                 <input type="checkbox" id="user_viewOnly" name="user_viewOnly"
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class=px-6 py-4">
                                             <input type="date" name="user_view_start_date" value="2000-01-01">
                                         </td>
                                         <td class="px-6 py-4">

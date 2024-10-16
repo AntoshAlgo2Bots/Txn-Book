@@ -130,7 +130,7 @@
                                     </button>
                                 </div>
 
-                                <div>
+                                <!-- <div>
                                     <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                                         Transaction Date :
                                     </label>
@@ -145,7 +145,7 @@
                                         </svg>
                                         <span class="sr-only">Search</span>
                                     </button>
-                                </div>
+                                </div> -->
 
                             </div>
 

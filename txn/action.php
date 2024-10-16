@@ -1,18 +1,9 @@
 <?php
 
 session_start();
-$conn = mysqli_connect(
-  "localhost",
-  "root",
-  "root",
-  "daily_txn_book"
-);
+include("../db/db.php");
 
-
-
-if (mysqli_connect_error()) {
-  echo "Connection Error.<br>";
-}
+date_default_timezone_set("Asia/Kolkata");
 
 $transaction_date = $_POST["transaction_date"];
 $amount_type = $_POST["amount_type"];
@@ -27,7 +18,7 @@ $invoice_date = $_POST["invoice_date"];
 $invoice_no = $_POST["invoice_no"];
 $gst_no = $_POST["gst_no"];
 $remarks = $_POST["remarks"];
-$currentUser = $_SESSION["username"];
+$currentUser = $_SESSION['username'];
 $currentTime = date("Y-m-d H:i:s");
 
 // $net_balace = $credit_amt - $debit_amt;

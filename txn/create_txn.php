@@ -3,20 +3,7 @@
 
 // session_start();
 
-$conn = mysqli_connect(
-    "localhost",
-    "root",
-    "root",
-    "daily_txn_book"
-);
-
-
-
-// echo $_SESSION["username"];
-
-if (mysqli_connect_error()) {
-    echo "Connection Error.<br>";
-}
+include("../db/db.php");
 
 $sql = "SELECT * 
 FROM txn_book 
@@ -236,7 +223,7 @@ if ($result3->num_rows > 0) {
                                     <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                                         GIVEN To / RECEIVED from :
                                     </label>
-                                    <input type="text" name="particuler_to"
+                                    <input type="text" name="particuler_to" required
                                         class="border-0 px-3 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm w-56 shadow focus:outline-none focus:ring-1 ease-linear transition-all duration-150">
                                 </div>
                                 <div>
@@ -244,7 +231,7 @@ if ($result3->num_rows > 0) {
                                     <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                                         Site :
                                     </label>
-                                    <input type="text" name="site"
+                                    <input type="text" name="site" required
                                         class="border-0 px-3 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm w-56 shadow focus:outline-none focus:ring-1 ease-linear transition-all duration-150">
                                 </div>
                                 <div>
@@ -482,11 +469,12 @@ if ($result3->num_rows > 0) {
 
                                 </td>
                                 <td class="px-6 py-4">
-                                    <input type="text" name="" id="<?php echo $row['currentUser'] ?>" class="w-32">
+                                <input type="text" name="sub_head" id="" value=" <?php echo $row['currentUser'] ?>" disabled
+                                class="w-32">
 
                                 </td>
                                 <td class="px-6 py-4">
-                                    <input type="text" name="" id="" value=" <?php echo $row['currentTime'] ?>">
+                                    <input type="text" name="" id="" value=" <?php echo $row['currentTime'] ?>" disabled> 
 
                                 </td>
                                 <td class="px-6 py-4">

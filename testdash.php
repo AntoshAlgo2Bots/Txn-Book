@@ -2,21 +2,7 @@
 
 
 // session_start();
-
-$conn = mysqli_connect(
-    "localhost",
-    "root",
-    "root",
-    "daily_txn_book"
-);
-
-
-
-// echo $_SESSION["username"];
-
-if (mysqli_connect_error()) {
-    echo "Connection Error.<br>";
-}
+include("./db/db.php");
 
 $sql = "SELECT  transaction_no, transaction_date, amount_type, credit_amt, debit_amt, net_balance,  main_head, sub_head , currentUser, currentTime From txn_book Order By transaction_no Desc Limit 5";
 // $sql="SELECT * FROM txn_book where form_status = 'SAVE'";
@@ -59,6 +45,20 @@ $result = mysqli_query($conn, $sql);
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
     <title>User Dashboard</title>
+
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('hidden');
+        }
+
+        
+    </script>
 </head>
 
 
@@ -94,356 +94,171 @@ $result = mysqli_query($conn, $sql);
         ?>
 
 
-        <nav class="bg-white dark:bg-gray-900  w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600  max-w-8xl mx-auto"
-            style="background-color: #6897ff; color: white;">
-            <div class="flex flex-wrap items-center justify-between mx-10 p-4">
-                <div class="flex gap-x-20">
-                    <div>
-                        <a href="./testdash.php" class="flex items-center space-x-3 rtl:space-x-reverse">
-                            <span class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">
-                                Hello! <?php echo $_SESSION["username"] ?></span>
+        <div class="flex flex-col lg:flex-row max-w-8xl mx-auto">
+            <!-- Sidebar -->
+            <aside id="sidebar" class="bg-[#F9FAFB] text-black border-gray-600 w-full lg:w-64 p-5 lg:static lg:h-auto hidden lg:block">
+                <h1 class="text-lg border-b pb-2 font-semibold mb-6">Daily Transaction Book</h1>
+                <nav>
+                    <div class="relative block w-full">
+                        <div role="button"
+                            class="flex items-center w-full p-0 leading-tight transition-all rounded-lg outline-none bg-blue-gray-50/50 text-start text-blue-gray-700 hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                            <button type="button" onclick="membershipFormShowHide()"
+                                class="flex items-center justify-between w-full p-3  text-xl antialiased font-semibold leading-snug text-left transition-colors border-b-0 select-none border-b-blue-gray-100 text-blue-gray-900 hover:text-blue-gray-900">
+                                
+                                <p
+                                    class="block mr-auto text-base antialiased font-bold leading-relaxed text-blue-gray-900 border-b">
+                                    Daily Txn Book
+                                </p>
+                                <span class="ml-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="2.5" stroke="currentColor" aria-hidden="true"
+                                        class="w-4 h-4 mx-auto transition-transform rotate-0">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
+                                    </svg>
+                                </span>
 
-                        </a>
-                    </div>
-                    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
-                        id="navbar-sticky">
-                        <a href="./testdash.php" class="font-semibold text-md">Home</a>
-                    </div>
-                </div>
-                <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                    <a href="logout.php" type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</a>
-                    <button data-collapse-toggle="navbar-sticky" type="button"
-                        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                        aria-controls="navbar-sticky" aria-expanded="false">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 17 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M1 1h15M1 7h15M1 13h15" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </nav>
-
-        <div class=" max-w-8xl mx-auto">
-
-
-
-            <div class="flex">
-
-
-
-                <div style="max-width: 18rem;"
-                    class="relative flex w-full max-w-[15rem] flex-col bg-white bg-clip-border p-4 text-gray-700 shadow-xl shadow-blue-gray-900/5">
-                    <div class="p-4 mb-2">
-                        <h5
-                            class="block  border-b border-black text-2xl  text-center pb-1 antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
-                            Roles
-                        </h5>
-                    </div>
-                    <nav class="flex min-w-[240px] flex-col gap-1 p-2  text-base font-normal text-blue-gray-700">
-                        <div class="relative block w-full">
-                            <div role="button"
-                                class="flex items-center w-full p-0 leading-tight transition-all rounded-lg outline-none bg-blue-gray-50/50 text-start text-blue-gray-700 hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-                                <button type="button" onclick="userFormShowHide()"
-                                    class="flex items-center justify-between w-full p-3  text-xl antialiased font-semibold leading-snug text-left transition-colors border-b-0 select-none border-b-blue-gray-100 text-blue-gray-900 hover:text-blue-gray-900">
-                                    <div class="grid mr-4 place-items-center">
-                                        <i class="fa-solid fa-user"></i>
-                                        <path fill-rule="evenodd"
-                                            d="M2.25 2.25a.75.75 0 000 1.5H3v10.5a3 3 0 003 3h1.21l-1.172 3.513a.75.75 0 001.424.474l.329-.987h8.418l.33.987a.75.75 0 001.422-.474l-1.17-3.513H18a3 3 0 003-3V3.75h.75a.75.75 0 000-1.5H2.25zm6.04 16.5l.5-1.5h6.42l.5 1.5H8.29zm7.46-12a.75.75 0 00-1.5 0v6a.75.75 0 001.5 0v-6zm-3 2.25a.75.75 0 00-1.5 0v3.75a.75.75 0 001.5 0V9zm-3 2.25a.75.75 0 00-1.5 0v1.5a.75.75 0 001.5 0v-1.5z"
-                                            clip-rule="evenodd"></path>
-                                        </svg>
-                                    </div>
-                                    <p
-                                        class="block mr-auto  text-base antialiased font-bold leading-relaxed text-blue-gray-900">
-                                        User Form
-                                    </p>
-                                    <span class="ml-4">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="2.5" stroke="currentColor" aria-hidden="true"
-                                            class="w-4 h-4 mx-auto transition-transform rotate-0">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
-                                        </svg>
-                                    </span>
-
-                                </button>
-
-                            </div>
-                            <div class="overflow-hidden  hidden" id="user-li-area"
-                                style="font-family: 'Poppins', sans-serif;">
-                                <div
-                                    class="block w-full py-1  text-sm antialiased font-light leading-normal text-gray-700">
-                                    <nav name="nav"
-                                        class="flex min-w-[240px] flex-col gap-1 p-0  text-base font-normal text-blue-gray-700">
-
-                                        <a href="./User/create_User.php"
-                                            class="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-                                            <div class="grid mr-4 place-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="3" stroke="currentColor" aria-hidden="true"
-                                                    class="w-5 h-3">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
-                                                </svg>
-                                            </div>
-                                            User Creation Form
-                                        </a>
-
-                                        <a href="./User/search_User.php"
-                                            class="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-                                            <div class="grid mr-4 place-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="3" stroke="currentColor" aria-hidden="true"
-                                                    class="w-5 h-3">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
-                                                </svg>
-                                            </div>
-                                            User Search Form
-                                        </a>
-
-                                        <a href="./User/user_report.php"
-                                            class="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-                                            <div class="grid mr-4 place-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="3" stroke="currentColor" aria-hidden="true"
-                                                    class="w-5 h-3">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
-                                                </svg>
-                                            </div>
-                                            User Report
-                                        </a>
-
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="relative block w-full">
-                            <div role="button"
-                                class="flex items-center w-full p-0 leading-tight transition-all rounded-lg outline-none bg-blue-gray-50/50 text-start text-blue-gray-700 hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-                                <button type="button" onclick="membershipFormShowHide()"
-                                    class="flex items-center justify-between w-full p-3  text-xl antialiased font-semibold leading-snug text-left transition-colors border-b-0 select-none border-b-blue-gray-100 text-blue-gray-900 hover:text-blue-gray-900">
-                                    <div class="grid mr-4 place-items-center">
-                                        <i class="fa-solid fa-receipt"></i>
-                                        <path fill-rule="evenodd"
-                                            d="M2.25 2.25a.75.75 0 000 1.5H3v10.5a3 3 0 003 3h1.21l-1.172 3.513a.75.75 0 001.424.474l.329-.987h8.418l.33.987a.75.75 0 001.422-.474l-1.17-3.513H18a3 3 0 003-3V3.75h.75a.75.75 0 000-1.5H2.25zm6.04 16.5l.5-1.5h6.42l.5 1.5H8.29zm7.46-12a.75.75 0 00-1.5 0v6a.75.75 0 001.5 0v-6zm-3 2.25a.75.75 0 00-1.5 0v3.75a.75.75 0 001.5 0V9zm-3 2.25a.75.75 0 00-1.5 0v1.5a.75.75 0 001.5 0v-1.5z"
-                                            clip-rule="evenodd"></path>
-                                        </svg>
-                                    </div>
-                                    <p
-                                        class="block mr-auto  text-base antialiased font-bold leading-relaxed text-blue-gray-900">
-                                        Daily Txn Book
-                                    </p>
-                                    <span class="ml-4">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="2.5" stroke="currentColor" aria-hidden="true"
-                                            class="w-4 h-4 mx-auto transition-transform rotate-0">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
-                                        </svg>
-                                    </span>
-
-                                </button>
-
-                            </div>
-                            <div class="overflow-hidden hidden " id="membership-li-area">
-                                <div
-                                    class="block w-full py-1  text-sm antialiased font-light leading-normal text-gray-700">
-                                    <nav name="nav"
-                                        class="flex min-w-[240px] flex-col gap-1 p-0  text-base font-normal text-blue-gray-700">
-
-                                        <a href="./txn/create_txn.php"
-                                            class="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-                                            <div class="grid mr-4 place-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="3" stroke="currentColor" aria-hidden="true"
-                                                    class="w-5 h-3">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
-                                                </svg>
-                                            </div>
-                                            Daily Txn Creation Form
-                                        </a>
-
-                                        <a href="./txn/search_txn.php"
-                                            class="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-                                            <div class="grid mr-4 place-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="3" stroke="currentColor" aria-hidden="true"
-                                                    class="w-5 h-3">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
-                                                </svg>
-                                            </div>
-                                            Daily Txn Search Form
-                                        </a>
-
-
-                                        <a href="./txn/txn_report.php"
-                                            class="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-                                            <div class="grid mr-4 place-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="3" stroke="currentColor" aria-hidden="true"
-                                                    class="w-5 h-3">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
-                                                </svg>
-                                            </div>
-                                            Daily Txn Report
-                                        </a>
-
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="relative block w-full">
+                            </button>
 
                         </div>
+                        <div class="overflow-hidden hidden" id="membership-li-area">
+                            <div class="block w-full py-1  text-sm antialiased font-light leading-normal text-gray-700">
+                                <nav name="nav"
+                                    class="flex flex-col gap-1 p-0  text-base font-normal text-blue-gray-700">
+
+                                    <a href="./txn/create_txn.php"
+                                        class="flex items-center w-full p-3 text-black leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                                        <div class="grid mr-4 place-items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="3" stroke="currentColor" aria-hidden="true"
+                                                class="w-5 h-3">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
+                                            </svg>
+                                        </div>
+                                        Daily Txn Creation Form
+                                    </a>
+
+                                    <a href="./txn/search_txn.php"
+                                        class="flex items-center w-full p-3 leading-tight text-black transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                                        <div class="grid mr-4 place-items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="3" stroke="currentColor" aria-hidden="true"
+                                                class="w-5 h-3">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
+                                            </svg>
+                                        </div>
+                                        Daily Txn Search Form
+                                    </a>
 
 
-                        <hr class="my-2 border-black" />
-                    </nav>
-                </div>
+                                    <a href="./txn/txn_report.php"
+                                        class="flex items-center w-full p-3 leading-tight text-black transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                                        <div class="grid mr-4 place-items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="3" stroke="currentColor" aria-hidden="true"
+                                                class="w-5 h-3">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
+                                            </svg>
+                                        </div>
+                                        Daily Txn Report
+                                    </a>
+
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative block w-full">
+                        <div role="button"
+                            class="flex items-center w-full p-0 leading-tight transition-all rounded-lg outline-none bg-blue-gray-50/50 text-start text-blue-gray-700 hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                            <button type="button" onclick="userFormShowHide()"
+                                class="flex items-center justify-between w-full p-3  text-xl antialiased font-semibold leading-snug text-left transition-colors border-b-0 select-none border-b-blue-gray-100 text-blue-gray-900 hover:text-blue-gray-900">
+                                
+                                <p
+                                    class="block mr-auto  text-base antialiased font-bold leading-relaxed text-blue-gray-900 border-b">
+                                   Add Attribute
+                                </p>
+                                <span class="ml-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="2.5" stroke="currentColor" aria-hidden="true"
+                                        class="w-4 h-4 mx-auto transition-transform rotate-0">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
+                                    </svg>
+                                </span>
+
+                            </button>
+
+                        </div>
+                        <div class="overflow-hidden hidden" id="user-li-area">
+                            <div class="block w-full py-1  text-sm antialiased font-light leading-normal text-gray-700">
+                                <nav name="nav"
+                                    class="flex flex-col gap-1 p-0  text-base font-normal text-blue-gray-700">
+
+                                    <a href="./addAttribute.php"
+                                        class="flex items-center w-full p-3 text-black leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                                        <div class="grid mr-4 place-items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="3" stroke="currentColor" aria-hidden="true"
+                                                class="w-5 h-3">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
+                                            </svg>
+                                        </div>
+                                        Add Attributes
+                                    </a>
+
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="flex-1 flex flex-col">
+                <!-- Navbar -->
+                <header class="bg-[#7695FF] text-white shadow p-4 flex items-center justify-between">
+                    <div class="flex items-center">
+                        <button onclick="toggleSidebar()" class="lg:hidden p-2 text-gray-600 hover:bg-gray-200 rounded">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16m-7 6h7"></path>
+                            </svg>
+                        </button>
+                        <h2 class="text-xl text-white font-semibold ml-2"> Hello! <?php echo $_SESSION["username"] ?></span></h2>
+                        <!-- <h2 class="text-xl font-semibold ml-2"> Hello! Antosh</span></h2> -->
+
+                        <div class="hidden  w-full md:flex md:w-auto md:order-1 ml-20" id="navbar-sticky">
+                            <a href="./testdash.php" class="font-semibold text-md">Home</a>
+                        </div>
+                    </div>
+                    <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                        <a href="logout.php" type="button"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</a>
+                    </div>
 
 
-                <div>
+                </header>
 
-
-                    <div class="w-full flex flex-wrap justify-center border-gray-200 mt-4" style="background-color: #;">
-
-                        <!-- <div class="datachart border-2 bg-gray-100 " style="width:32rem; height:20rem" id="txn_div"></div> -->
-                        <div class="flex flex-wrap">
-                            
+                <!-- Content Area -->
+                <main class="flex-1 p-6 bg-gray-100">
+                    <h3 class="text-lg font-semibold mb-4">Overview</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-4">
+                        <div class="bg-white p-4 rounded shadow">
                             <?php include("./barChart.php") ?>
                         </div>
-                        <div class="flex flex-wrap gap-x-20 ">
-                            
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 mt-5">
+                        <div class="flex flex-wrap gap-x-20 gap-y-10 bg-white p-4 rounded shadow">
                             <?php include("./pieChart.php") ?>
                         </div>
-                        <a href="./user/user_report.php">
-                            <!-- <div class="datachart border-2 bg-gray-100 ml-5" style="width:32rem; height:20rem"
-                                id="user_div">
-                            </div> -->
-                        </a>
                     </div>
-                    <div>
-                        <!-- <div class="relative overflow-x-auto mt-4 mx-10">
-                            <table
-                                class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mb-2">
-                                <thead
-                                    class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3">
-                                            Txn No
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Transaction Date
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Amount Type
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Credit Amount
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Debit Amount
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Net Balance
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Main Head
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Sub Head
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Created By
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Created Date
-                                        </th>
-
-
-                                    </tr>
-                                </thead>
-                                <tbody class="" id="rowAreaTbody">
-
-
-                                    <?php
-
-                                    while ($row = mysqli_fetch_assoc($result)) {
-
-                                        // echo print_r($row);
-                                    
-
-
-
-
-
-                                        ?>
-
-
-                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" class="px-6 py-4">
-                                                <?php echo $row['transaction_no'] ?>
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                <?php echo $row['transaction_date'] ?>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <?php echo $row['amount_type'] ?>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <?php echo $row['credit_amt'] ?>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <?php echo $row['debit_amt'] ?>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <?php echo $row['net_balance'] ?>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <?php echo $row['main_head'] ?>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <?php echo $row['sub_head'] ?>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <?php echo $row['currentUser'] ?>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <?php echo $row['currentTime'] ?>
-                                            </td>
-
-                                        </tr>
-
-                                        <?php
-
-
-                                    }
-
-                                    ?>
-                                </tbody>
-                            </table>
-                        </div> -->
-                    </div>
-
-
-                </div>
+                </main>
             </div>
-
-
-
-
-
-
-
-
         </div>
 
 

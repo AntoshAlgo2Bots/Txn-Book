@@ -2,19 +2,8 @@
 
 session_start();
 
+include("./db/db.php");
 
-$conn = mysqli_connect(
-    "localhost",
-    "root",
-    "root",
-    "membership_project"
-);
-
-
-
-if (mysqli_connect_error()) {
-    echo "Connection Error.<br>";
-}
 
 
 

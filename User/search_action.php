@@ -1,16 +1,6 @@
 <?php 
 
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$db = "daily_txn_book";
-
-$conn = new mysqli($servername, $username, $password, $db);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-echo "Connected successfully <br>";
+include("../db/db.php");
 
 // $user_name = $_POST['user_name'];
 // $membership_id = $_POST['membership_id'];
