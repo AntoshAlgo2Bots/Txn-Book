@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // echo "<script>alert(")</script>"
 
                 // Display the values
-                header("location:testdash.php");
+                header("location:dashboard.php");
 
 
 

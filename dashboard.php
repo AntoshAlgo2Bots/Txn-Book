@@ -107,7 +107,7 @@ $result = mysqli_query($conn, $sql);
                 <!-- <h2 class="text-xl font-semibold ml-2"> Hello! Antosh</span></h2> -->
 
                 <div class="hidden  w-full md:flex md:w-auto md:order-1 ml-20" id="navbar-sticky">
-                    <a href="./testdash.php" class="font-semibold text-md">Home</a>
+                    <a href="./dashboard.php" class="font-semibold text-md">Home</a>
                 </div>
             </div>
             <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -258,7 +258,7 @@ $result = mysqli_query($conn, $sql);
                         </div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-4 mt-5">
-                        <div class="bg-white p-4 rounded shadow">
+                        <div class="bg-white gap-y-10 p-4 rounded shadow">
                             <?php include("./barChart.php") ?>
                         </div>
                     </div>

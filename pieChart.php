@@ -98,7 +98,7 @@ $conn->close();
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body class="bg-gray-100 flex flex-wrap items-center justify-center min-h-screen">
+<body class="bg-gray-100 flex flex-wrap items-center gap-y-10 justify-center min-h-screen">
     <div class="bg-white shadow-lg rounded-lg p-8 max-w-64 mx-auto text-center border">
         <h1 class="text-xl font-bold mb-6">All Credit And Debit Txn</h1>
         <div class="flex">
