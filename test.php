@@ -121,7 +121,7 @@
                     <h2 class="text-xl font-semibold ml-2"> Hello! Antosh</span></h2>
 
                     <div class="hidden w-full md:flex md:w-auto md:order-1 ml-20" id="navbar-sticky">
-                        <a href="./testdash.php" class="font-semibold text-md">Home</a>
+                        <a href="./dashboard.php" class="font-semibold text-md">Home</a>
                     </div>
                 </div>
                 <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">

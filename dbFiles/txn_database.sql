@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `daily_txn_book` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `daily_txn_book`;
 -- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
 --
 -- Host: localhost    Database: daily_txn_book
@@ -75,7 +77,7 @@ CREATE TABLE `txn_book` (
   `updatedBy` varchar(45) DEFAULT NULL,
   `updatedDate` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`transaction_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,6 +86,7 @@ CREATE TABLE `txn_book` (
 
 LOCK TABLES `txn_book` WRITE;
 /*!40000 ALTER TABLE `txn_book` DISABLE KEYS */;
+INSERT INTO `txn_book` VALUES (1,'2024-10-16','Credit','100000','0','100000','Fuel','Fuel','DDA','CD-III','101','2024-12-31','101','101','abc','SUBMIT','admin','2024-10-16 17:43:34',NULL,NULL),(2,'2024-10-17','Debit','0','20000','80000','Fuel','Fuel','Select one','Select one','','','','','','SUBMIT','admin','2024-10-17 13:09:40',NULL,NULL),(3,'2024-10-17','Credit','30000','0','110000','Fuel','Fuel','Select one','Select one','','','','','','SUBMIT','admin','2024-10-17 13:18:38',NULL,NULL),(4,'2024-10-17','Debit','0','10000','100000','Fuel','Fuel','Select one','Select one','','','','','','SUBMIT','admin','2024-10-17 13:19:54',NULL,NULL),(5,'2024-10-17','Credit','20000','0','120000','Fuel','Fuel','DVR','STAFF WELFARE','','','','','','SAVE','admin','2024-10-17 17:33:51',NULL,NULL),(6,'2024-10-17','Credit','100000','0','220000','Fuel','Fuel','FUEL & VM','BF','','','','','','SAVE','admin','2024-10-17 17:53:58',NULL,NULL);
 /*!40000 ALTER TABLE `txn_book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,14 +201,6 @@ LOCK TABLES `user_role` WRITE;
 INSERT INTO `user_role` VALUES (1,'61',1,'2024-09-27','2024-09-18',0,'','',1,'2024-09-17','2024-09-17',0,'','',0,'','',0,'',''),(2,'62',1,'2024-09-11','2024-09-06',0,'','',0,'','',0,'','',0,'','',1,'2024-09-18','2024-09-16'),(3,'63',1,'2024-10-08','2024-09-30',0,'','',0,'','',0,'','',0,'','',1,'2024-09-18','2024-09-16'),(4,'64',1,'2024-09-25','2024-09-15',0,'','',0,'','',0,'','',0,'','',1,'2024-10-02','2024-09-17'),(5,'65',1,'2024-10-07','2024-10-10',0,'','',0,'','',0,'','',0,'','',1,'2024-10-07','2024-10-10'),(6,'66',1,'2024-10-08','2024-10-08',0,'','',0,'','',0,'','',0,'','',1,'2024-10-08','2024-10-08'),(7,'67',0,'2025-01-02','2024-12-31',0,'','',0,'','',0,'','',0,'','',0,'',''),(8,'68',0,'','',0,'','',0,'','',1,'','',1,'','',1,'',''),(9,'2',0,'','',0,'','',0,'','',0,'','',0,'','',0,'',''),(10,'3',0,'','',0,'','',0,'','',0,'','',0,'','',0,'','');
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping events for database 'daily_txn_book'
---
-
---
--- Dumping routines for database 'daily_txn_book'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -216,4 +211,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-16 15:31:09
+-- Dump completed on 2024-10-17 18:01:57

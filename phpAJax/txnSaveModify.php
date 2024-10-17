@@ -3,16 +3,7 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "daily_txn_book";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include("../db/db.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     foreach ($_POST['rows'] as $row) {

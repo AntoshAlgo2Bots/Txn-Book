@@ -36,13 +36,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $row = mysqli_fetch_assoc($result);
 
             echo "Success user found\n";
+
+
         
             echo $row['password']."\n";
             
             if ($row["password"] == $password) {
                 // echo $row["mobile_number"];
 
-                // header("location:dashboard.php");
+                header("location:dashboard.php");
                 $respone["loggedIn"] = "true";
                 $respone["message"] = "success";
                 $_SESSION["username"] = $row["user_name"];

@@ -2,7 +2,7 @@
 
 
 if(isset($_SESSION['username'])){
-    header('location:test_dash.php');
+    header('location:dashboard.php');
 }
 
 ?>
