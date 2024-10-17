@@ -108,8 +108,8 @@ $conn->close();
     </div>
 
     <div class="bg-white shadow-lg rounded-lg p-8 max-w-64 mx-auto text-center border">
-        <h1 class="text-xl font-bold mb-6">Net Balance</h1>
-        <h2>Total Save + Submit Txn</h2>
+        <h1 class="text-xl font-bold mb-4">Net Balance</h1>
+        <h2 class="text-md mb-2">Total Save + Submit Txn</h2>
         <div class="flex">
 
             <!-- <canvas id="totalCreaditAndDebitChart" class="w-full h-auto"></canvas> -->
@@ -192,11 +192,26 @@ $conn->close();
             }
         });
 
+        // const dataValues = [totalCredit1 || 0, total_debit1 || 0];
+        // const labels = [];
+
+        // if (totalCredit1) {
+        //     labels.push('Save Credit');
+        // } else {
+        //     labels.push('No Credit');
+        // }
+
+        // if (total_debit1) {
+        //     labels.push('Save Debits');
+        // } else {
+        //     labels.push('No Debits');
+        // }
+
 
         const totalSaveAndSaveChart = new Chart(ctx3, {
             type: 'pie',
             data: {
-                labels: ['Save Credit', 'Save Debits'],
+                labels: ['Credit', 'Debits'],
                 datasets: [{
                     label: 'Balance',
                     data: [totalCredit1, total_debit1],
@@ -222,7 +237,7 @@ $conn->close();
         const SubmitChart = new Chart(ctx4, {
             type: 'pie',
             data: {
-                labels: ['Submit Credit', 'Submit Debits'],
+                labels: ['Credit', 'Debits'],
                 datasets: [{
                     label: 'Balance',
                     data: [totalCredit2, total_debit2],
